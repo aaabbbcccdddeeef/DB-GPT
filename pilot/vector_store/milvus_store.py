@@ -97,6 +97,7 @@ class MilvusStore(VectorStoreBase):
             )
         texts = [d.page_content for d in documents]
         metadatas = [d.metadata for d in documents]
+        print("milvus begin embedding")
         embeddings = self.embedding.embed_query(texts[0])
         dim = len(embeddings)
         # Generate unique names
@@ -148,6 +149,7 @@ class MilvusStore(VectorStoreBase):
         # vector field
         fields.append(FieldSchema(vector_field, DataType.FLOAT_VECTOR, dim=dim))
         # milvus the schema for the collection
+        print("milvus begin CollectionSchema")
         schema = CollectionSchema(fields)
         # Create the collection
         collection = Collection(collection_name, schema)
@@ -165,6 +167,7 @@ class MilvusStore(VectorStoreBase):
                 self.primary_field = x.name
             if x.dtype == DataType.FLOAT_VECTOR or x.dtype == DataType.BINARY_VECTOR:
                 self.vector_field = x.name
+        print("milvus begin insert data")
         self._add_texts(texts, metadatas)
 
         return self.collection_name
