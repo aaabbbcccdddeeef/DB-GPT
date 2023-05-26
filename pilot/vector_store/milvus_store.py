@@ -160,7 +160,7 @@ class MilvusStore(VectorStoreBase):
         index = self.index_params
         # milvus index
         print("milvus  index create begin")
-        collection.create_index(vector_field, index)
+        # collection.create_index(vector_field, index)
         print("milvus  index create done")
         schema = collection.schema
         for x in schema.fields:
