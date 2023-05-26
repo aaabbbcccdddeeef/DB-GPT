@@ -252,7 +252,9 @@ class MilvusStore(VectorStoreBase):
             insert_list, partition_name=partition_name, timeout=timeout
         )
         # make sure data is searchable.
+        print("milvus begin flush")
         self.col.flush()
+        print("milvus flush success")
         return res.primary_keys
 
     def load_document(self, documents) -> None:
