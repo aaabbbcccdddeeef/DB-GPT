@@ -91,6 +91,7 @@ class PromptRequest(BaseModel):
     prompt: str
     temperature: float
     max_new_tokens: int
+    open_ai_key: str
     model: str
     stop: str = None
 
@@ -100,6 +101,7 @@ class StreamRequest(BaseModel):
     prompt: str
     temperature: float
     max_new_tokens: int
+    open_ai_key: str
     stop: str
 
 
@@ -134,6 +136,7 @@ def generate(prompt_request: PromptRequest):
         "temperature": prompt_request.temperature,
         "max_new_tokens": prompt_request.max_new_tokens,
         "stop": prompt_request.stop,
+        "open_ai_key": prompt_request.open_ai_key,
     }
 
     response = []

@@ -234,6 +234,7 @@ def http_bot(
     selected,
     temperature,
     max_new_tokens,
+    open_ai_key,
     plugin_selector,
     mode,
     sql_mode,
@@ -259,6 +260,7 @@ def http_bot(
             "chat_session_id": state.conv_id,
             "db_name": db_selector,
             "user_input": state.last_user_input,
+            "open_ai_key": open_ai_key,
         }
     elif ChatScene.ChatWithDbQA == scene:
         chat_param = {
@@ -267,6 +269,7 @@ def http_bot(
             "chat_session_id": state.conv_id,
             "db_name": db_selector,
             "user_input": state.last_user_input,
+            "open_ai_key": open_ai_key,
         }
     elif ChatScene.ChatExecution == scene:
         chat_param = {
@@ -275,6 +278,7 @@ def http_bot(
             "chat_session_id": state.conv_id,
             "plugin_selector": plugin_selector,
             "user_input": state.last_user_input,
+            "open_ai_key": open_ai_key,
         }
     elif ChatScene.ChatNormal == scene:
         chat_param = {
@@ -282,6 +286,7 @@ def http_bot(
             "max_new_tokens": max_new_tokens,
             "chat_session_id": state.conv_id,
             "user_input": state.last_user_input,
+            "open_ai_key": open_ai_key,
         }
     elif ChatScene.ChatKnowledge == scene:
         chat_param = {
@@ -289,6 +294,7 @@ def http_bot(
             "max_new_tokens": max_new_tokens,
             "chat_session_id": state.conv_id,
             "user_input": state.last_user_input,
+            "open_ai_key": open_ai_key,
         }
     elif ChatScene.ChatNewKnowledge == scene:
         chat_param = {
@@ -297,6 +303,7 @@ def http_bot(
             "chat_session_id": state.conv_id,
             "user_input": state.last_user_input,
             "knowledge_name": knowledge_name,
+            "open_ai_key": open_ai_key,
         }
     elif ChatScene.ChatUrlKnowledge == scene:
         chat_param = {
@@ -305,6 +312,7 @@ def http_bot(
             "chat_session_id": state.conv_id,
             "user_input": state.last_user_input,
             "url": url_input,
+            "open_ai_key": open_ai_key,
         }
     else:
         state.messages[-1][-1] = f"ERROR: Can't support scene!{scene}"
@@ -392,6 +400,12 @@ def build_single_model_ui():
             label=get_lang_text("max_input_token_size"),
         )
 
+        open_ai_key = gr.Textbox(
+            lines=1,
+            placeholder="please input your open ai key, such as 'sk-xxxx'",
+            interactive=True,
+            label=get_lang_text("your_open_ai_key"),
+        )
     tabs = gr.Tabs()
 
     def on_select(evt: gr.SelectData):  # SelectData is a subclass of EventData
@@ -539,7 +553,7 @@ def build_single_model_ui():
     btn_list = [regenerate_btn, clear_btn]
     regenerate_btn.click(regenerate, state, [state, chatbot, textbox] + btn_list).then(
         http_bot,
-        [state, selected, temperature, max_output_tokens] + params,
+        [state, selected, temperature, max_output_tokens, open_ai_key] + params,
         [state, chatbot] + btn_list,
     )
     clear_btn.click(clear_history, None, [state, chatbot, textbox] + btn_list)
@@ -548,7 +562,7 @@ def build_single_model_ui():
         add_text, [state, textbox], [state, chatbot, textbox] + btn_list
     ).then(
         http_bot,
-        [state, selected, temperature, max_output_tokens] + params,
+        [state, selected, temperature, max_output_tokens, open_ai_key] + params,
         [state, chatbot] + btn_list,
     )
 
@@ -556,7 +570,7 @@ def build_single_model_ui():
         add_text, [state, textbox], [state, chatbot, textbox] + btn_list
     ).then(
         http_bot,
-        [state, selected, temperature, max_output_tokens] + params,
+        [state, selected, temperature, max_output_tokens, open_ai_key] + params,
         [state, chatbot] + btn_list,
     )
     vs_add.click(
