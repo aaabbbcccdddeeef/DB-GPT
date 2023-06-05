@@ -20,6 +20,7 @@ class InnerChatDBSummary(BaseChat):
         user_input,
         db_select,
         db_summary,
+        open_ai_key,
     ):
         """ """
         super().__init__(
@@ -28,6 +29,7 @@ class InnerChatDBSummary(BaseChat):
             chat_mode=ChatScene.InnerChatDBSummary,
             chat_session_id=chat_session_id,
             current_user_input=user_input,
+            open_ai_key=open_ai_key,
         )
 
         self.db_input = db_select

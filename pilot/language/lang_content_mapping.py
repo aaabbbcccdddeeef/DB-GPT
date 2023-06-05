@@ -37,6 +37,7 @@ lang_dicts = {
         "send": "发送",
         "regenerate": "重新生成",
         "clear_box": "清理",
+        "your_open_ai_key": "请输入OpenAi账号secret key",
     },
     "en": {
         "unique_id": "English Content",
@@ -74,6 +75,7 @@ lang_dicts = {
         "send": "Send",
         "regenerate": "Regenerate",
         "clear_box": "Clear",
+        "your_open_ai_key": "please input the secret key of your OpenAi account",
     },
 }
 

@@ -29,7 +29,7 @@ class ChatNewKnowledge(BaseChat):
     """Number of results to return from the query"""
 
     def __init__(
-        self, temperature, max_new_tokens, chat_session_id, user_input, knowledge_name
+        self, temperature, max_new_tokens, chat_session_id, user_input, knowledge_name, open_ai_key
     ):
         """ """
         super().__init__(
@@ -38,6 +38,7 @@ class ChatNewKnowledge(BaseChat):
             chat_mode=ChatScene.ChatNewKnowledge,
             chat_session_id=chat_session_id,
             current_user_input=user_input,
+            open_ai_key=open_ai_key,
         )
         self.knowledge_name = knowledge_name
         vector_store_config = {

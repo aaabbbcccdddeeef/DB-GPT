@@ -15,9 +15,13 @@ def proxyllm_generate_stream(model, tokenizer, params, device, context_len=2048)
     prompt = params["prompt"]
     stop = params.get("stop", "###")
 
+    open_ai_key = params.get("open_ai_key")
+    if open_ai_key is None:
+        raise "Please add the correct key."
+
     headers = {
-        "Authorization": "Bearer " + CFG.proxy_api_key,
-        "Token": CFG.proxy_api_key,
+        "Authorization": "Bearer " + open_ai_key,
+        "Token": open_ai_key,
     }
 
     messages = prompt.split(stop)

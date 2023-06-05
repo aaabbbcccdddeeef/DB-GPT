@@ -22,7 +22,7 @@ class ChatWithDbAutoExecute(BaseChat):
     """Number of results to return from the query"""
 
     def __init__(
-        self, temperature, max_new_tokens, chat_session_id, db_name, user_input
+        self, temperature, max_new_tokens, chat_session_id, db_name, user_input, open_ai_key
     ):
         """ """
         super().__init__(
@@ -31,6 +31,7 @@ class ChatWithDbAutoExecute(BaseChat):
             chat_mode=ChatScene.ChatWithDbExecute,
             chat_session_id=chat_session_id,
             current_user_input=user_input,
+            open_ai_key=open_ai_key,
         )
         if not db_name:
             raise ValueError(

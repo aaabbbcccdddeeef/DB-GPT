@@ -51,6 +51,7 @@ class BaseChat(ABC):
     max_new_tokens: int = 1024
     # By default, keep the last two rounds of conversation records as the context
     chat_retention_rounds: int = 2
+    open_ai_key: str = None
 
     class Config:
         """Configuration for this pydantic object."""
@@ -64,6 +65,7 @@ class BaseChat(ABC):
         chat_mode,
         chat_session_id,
         current_user_input,
+        open_ai_key,
     ):
         self.chat_session_id = chat_session_id
         self.chat_mode = chat_mode
@@ -83,6 +85,7 @@ class BaseChat(ABC):
         self.current_tokens_used: int = 0
         self.temperature = temperature
         self.max_new_tokens = max_new_tokens
+        self.open_ai_key = open_ai_key
         ### load chat_session_id's chat historys
         self._load_history(self.chat_session_id)
 
@@ -132,6 +135,7 @@ class BaseChat(ABC):
             "temperature": float(self.temperature),
             "max_new_tokens": int(self.max_new_tokens),
             "stop": self.prompt_template.sep,
+            "open_ai_key": self.open_ai_key,
         }
         return payload
 

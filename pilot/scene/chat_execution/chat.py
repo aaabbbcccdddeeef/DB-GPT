@@ -27,6 +27,7 @@ class ChatWithPlugin(BaseChat):
         chat_session_id,
         user_input,
         plugin_selector: str = None,
+        open_ai_key: str = None,
     ):
         super().__init__(
             temperature=temperature,
@@ -34,6 +35,7 @@ class ChatWithPlugin(BaseChat):
             chat_mode=ChatScene.ChatExecution,
             chat_session_id=chat_session_id,
             current_user_input=user_input,
+            open_ai_key=open_ai_key,
         )
         self.plugins_prompt_generator = PluginPromptGenerator()
         self.plugins_prompt_generator.command_registry = CFG.command_registry

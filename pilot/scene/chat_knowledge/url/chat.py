@@ -28,7 +28,7 @@ class ChatUrlKnowledge(BaseChat):
 
     """Number of results to return from the query"""
 
-    def __init__(self, temperature, max_new_tokens, chat_session_id, user_input, url):
+    def __init__(self, temperature, max_new_tokens, chat_session_id, user_input, url, open_ai_key):
         """ """
         super().__init__(
             temperature=temperature,
@@ -36,6 +36,7 @@ class ChatUrlKnowledge(BaseChat):
             chat_mode=ChatScene.ChatUrlKnowledge,
             chat_session_id=chat_session_id,
             current_user_input=user_input,
+            open_ai_key=open_ai_key,
         )
         self.url = url
         vector_store_config = {

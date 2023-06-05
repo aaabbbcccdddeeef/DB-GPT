@@ -18,7 +18,7 @@ class ChatNormal(BaseChat):
 
     """Number of results to return from the query"""
 
-    def __init__(self, temperature, max_new_tokens, chat_session_id, user_input):
+    def __init__(self, temperature, max_new_tokens, chat_session_id, user_input, open_ai_key):
         """ """
         super().__init__(
             temperature=temperature,
@@ -26,6 +26,7 @@ class ChatNormal(BaseChat):
             chat_mode=ChatScene.ChatNormal,
             chat_session_id=chat_session_id,
             current_user_input=user_input,
+            open_ai_key=open_ai_key,
         )
 
     def generate_input_values(self):
